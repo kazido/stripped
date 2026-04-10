@@ -1,12 +1,14 @@
-from .base import Entity
+from .enemy import Enemy
 from game.items.armor import Armor
 from game.save.save_data import PlayerSaveData
 from game.items import ITEM_REGISTRY
 
-class Player(Entity):
+
+
+class Player:
     def __init__(self, save_data: PlayerSaveData) -> None:
+        # Load our player's data from the database once
         self.data = save_data
-        super().__init__()
 
 
     def _get_gear_hp_bonus(self) -> int:
@@ -27,18 +29,17 @@ class Player(Entity):
         return 10 + level_bonus
     
     @property
-    def name(self) -> str:
-        return self.data.name
-    
-    @property
     def gold(self) -> int:
         return self.data.gold
     
 
-    def take_turn(self, targets: list[Entity], log) -> None:
+    def take_turn(self, targets: list[Enemy], log) -> None:
         pass
 
     def take_damage(self, amount: int) -> bool:
         """Returns True if dead."""
         self.current_hp -= amount
         return self.is_dead
+    
+    def __str__(self) -> str:
+        return f"{self.data.name}"

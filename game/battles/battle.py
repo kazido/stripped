@@ -1,12 +1,12 @@
 from typing import Callable
 from ..entities.player import Player
-from ..entities.base import Entity
+from ..entities.enemy import Enemy
 
 
 class Battle:
     def __init__(self, log_func: Callable[[str], None]) -> None:
         self.players: list[Player] = []
-        self.enemies: list[Entity] = []
+        self.enemies: list[Enemy] = []
         self.log = log_func
 
 
@@ -18,8 +18,12 @@ class Battle:
     def process_turn(self) -> None:
         """Process a turn for each entity in the battle."""
         for entity in self.get_turn_order():
-            self.log(f"It's {entity.name}'s turn.")
-            entity.take_turn(targets=self.players + self.enemies, log=self.log)
+            self.log(f"It's {entity}'s turn.")
+            if isinstance(entity, Player):
+                entity.take_turn(self.enemies, self.log)
+            elif isinstance(entity, Enemy):
+                entity.take_turn(self.enemies, self.log)
+
 
 
     def post_battle(self) -> None:
@@ -27,7 +31,7 @@ class Battle:
         pass
 
 
-    def get_turn_order(self) -> list[Entity]:
+    def get_turn_order(self) -> list[Player | Enemy]:
         """Returns a list of all entities sorted by their speed."""
         p = self.players + self.enemies
         return sorted(p, key=lambda e: e.speed, reverse=True)
