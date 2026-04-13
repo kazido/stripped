@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from textrpg.items.armor import Armor
+from textrpg.util.damage_source import DamageSource
 from textrpg.player.save_data import PlayerSaveData
 from textrpg.items import ITEM_REGISTRY
-from textrpg.events.event import LevelUpEvent, DamageDealtEvent, EntityDeathEvent
 
 
 
@@ -31,21 +31,13 @@ class Player:
         level_bonus = self.data.level
         return 10 + level_bonus
     
-    @property
-    def gold(self) -> int:
-        return self.data.gold
-    
     def gain_skill_xp(self, skill_name: str, amount: int) -> None:
         skill = getattr(self.data, skill_name)
 
 
-    def take_damage(self, attacker: Enemy) -> None:
+    def take_damage(self, source: DamageSource, amount: int) -> None:
         """Returns True if dead."""
-        self.current_hp -= attacker.DAMAGE
-        handler().output_event(DamageDealtEvent(attacker, self, attacker.DAMAGE))
-        # Upon taking fatal damage, output the death event
-        if self.is_dead:
-            handler().output_event(EntityDeathEvent(self))
+        self.current_hp -= amount
     
     @property
     def is_dead(self) -> bool:

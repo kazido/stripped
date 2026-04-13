@@ -1,12 +1,22 @@
 from abc import ABC, abstractmethod
-from game.entities.enemy import Enemy
-from game.battles.action import Action
+from typing import TYPE_CHECKING
+
+from textrpg.events.action import Action
+from textrpg.events.event import Event
+
+if TYPE_CHECKING:
+    from textrpg.entities.enemies.enemy import Enemy
 
 
 class IOHandler(ABC):
     @abstractmethod
     def output(self, message: str) -> None:
         """Display some text to the player."""
+        pass
+
+    @abstractmethod
+    def output_event(self, event: Event) -> None:
+        """Display an event to the player."""
         pass
 
     @abstractmethod
