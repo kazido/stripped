@@ -1,4 +1,4 @@
-from ..player.player import Player
+from ..entities.player.player import Player
 from ..entities.enemies.enemy import Enemy
 from textrpg.events.io import IOHandler, handler
 from textrpg.events.event import TurnStartedEvent

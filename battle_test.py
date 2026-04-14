@@ -1,10 +1,10 @@
 from textrpg.events.battle import Battle
-from textrpg.player.player import Player
+from textrpg.entities.player.player import Player
 from textrpg.entities.enemies.enemy import Goblin, Centaur, UnstableDrone
 from textrpg.events.handlers import TerminalIOHandler
 from textrpg.events.io import set_handler
 
-from textrpg.player.save_data import PlayerSaveData
+from textrpg.entities.player.save_data import PlayerSaveData
 
 
 def run_battle_test():

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from textrpg.items.armor import Armor
-from textrpg.player.save_data import PlayerSaveData
+from textrpg.entities.player.save_data import PlayerSaveData
 from textrpg.items import ITEM_REGISTRY
 from textrpg.events.event import LevelUpEvent, DamageDealtEvent, EntityDeathEvent
 

@@ -2,7 +2,7 @@ from abc import ABC
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from textrpg.player.player import Player
+    from textrpg.entities.player.player import Player
     from textrpg.entities.enemies.enemy import Enemy
 
 
