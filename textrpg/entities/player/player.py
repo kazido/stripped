@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from textrpg.items.armor import Armor
 from textrpg.util.damage_source import DamageSource
-from textrpg.player.save_data import PlayerSaveData
+from textrpg.entities.player.save_data import PlayerSaveData
 from textrpg.items import ITEM_REGISTRY
 
 
