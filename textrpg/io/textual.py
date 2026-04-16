@@ -1,7 +1,7 @@
 from textrpg.core.io import IOHandler
 from textrpg.core.event import Event, MessageEvent, LevelUpEvent, DamageDealtEvent, EntityDeathEvent, TurnStartedEvent, ActionPerformedEvent
 from textrpg.core.action import Action
-from textrpg.entities.enemies.enemy import Enemy
+from textrpg.scenes.battle.entities.enemies.enemy import Enemy
 
 class TextualIOHandler(IOHandler):
     """Stub for Textual-based IOHandler. TODO: Implement with Textual widgets."""

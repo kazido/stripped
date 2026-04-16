@@ -1,21 +1,21 @@
-from textrpg.entities.player.player import Player
-from textrpg.entities.enemies.enemy import Enemy
+from textrpg.core.player.player import Player
+from textrpg.scenes.battle.entities.enemies.enemy import Enemy
 from textrpg.core.entity import Entity
-from textrpg.scenes.battle.util.stat_manager import Stat
+from textrpg.core.stats import Stat
 from textrpg.core.io import IOHandler
+from textrpg.core.scene import Scene
 
 
-class Battle:
+class Battle(Scene):
     def __init__(self, handler: IOHandler) -> None:
+        super().__init__(handler)
         self._players: list[Player] = []
         self._enemies: list[Enemy] = []
-        self.handler = handler
-
 
     @property
     def players(self) -> list[Player]:
         # TODO: Change if a dead player can be targeted (revives)
-        return [p for p in self._players if not p.is_dead]
+        return [p for p in self._players if not p.combat.is_dead]
     
     @property
     def enemies(self) -> list[Enemy]:
@@ -45,22 +45,17 @@ class Battle:
         """Handles any actions that should happen before a battle."""
         self.handler.output("Battle start!")
         for entity in self.get_turn_order():
-            entity.pre_battle()
-
-
+            entity.on_scene_start()
 
     def process_turns(self) -> None:
         """Process a turn for each entity in the battle."""
         for entity in self.get_turn_order():
-            entity.take_turn()
-
-
+            entity.on_turn()
 
     def post_battle(self) -> None:
         """Handles any actions that should happen after a battle."""
         for entity in self.get_turn_order():
-            entity.post_battle()
-
+            entity.on_scene_end()
         self.handler.output("Battle has finished!")
 
 
@@ -69,12 +64,11 @@ class Battle:
         p = self.players + self.enemies
         return sorted(p, key=lambda e: e.data.get(Stat.SPEED), reverse=True)
     
-
     def players_won(self) -> bool:
         """Returns True if all enemies are dead."""
         return all(enemy.is_dead for enemy in self.enemies)
     
     def enemies_won(self) -> bool:
         """Returns True if all players are dead."""
-        return all(player.is_dead for player in self.players)
+        return all(player.combat.is_dead for player in self.players)
 

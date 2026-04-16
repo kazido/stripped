@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
-from textrpg.core.action import Action
-from textrpg.core.event import Event
-
 if TYPE_CHECKING:
-    from textrpg.entities.enemy.enemy import Enemy
+    from textrpg.core.action import Action
+    from textrpg.core.event import Event
+    from textrpg.scenes.battle.entities.enemies import Enemy
 
 
 class IOHandler(ABC):

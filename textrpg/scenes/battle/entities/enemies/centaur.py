@@ -1,4 +1,5 @@
-from textrpg.entities.enemy.enemy import Enemy
+from .enemy import Enemy
+from textrpg.scenes.battle.util import DamageSource
 
 class Centaur(Enemy):
     NAME = "Centaur"
