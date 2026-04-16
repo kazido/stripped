@@ -3,7 +3,7 @@ import time
 from textrpg.events.io import IOHandler
 from textrpg.events.event import Event, MessageEvent, LevelUpEvent, DamageDealtEvent, EntityDeathEvent, TurnStartedEvent, ActionPerformedEvent
 from textrpg.events.action import Action
-from textrpg.entities.enemies.enemy import Enemy
+from textrpg.entities.enemy.enemy import Enemy
 
 
 class TerminalIOHandler(IOHandler):

@@ -5,7 +5,7 @@ from textrpg.events.action import Action
 from textrpg.events.event import Event
 
 if TYPE_CHECKING:
-    from textrpg.entities.enemies.enemy import Enemy
+    from textrpg.entities.enemy.enemy import Enemy
 
 
 class IOHandler(ABC):

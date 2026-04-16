@@ -1,7 +1,8 @@
-from ..entities.player.player import Player
-from ..entities.enemies.enemy import Enemy
-from textrpg.events.io import IOHandler, handler
-from textrpg.events.event import TurnStartedEvent
+from textrpg.entities.player.player import Player
+from textrpg.entities.enemy.enemy import Enemy
+from textrpg.entities.entity import Entity
+from textrpg.util.stat_manager import Stat
+from textrpg.events.io import IOHandler
 
 
 class Battle:
@@ -42,38 +43,31 @@ class Battle:
 
     def pre_battle(self) -> None:
         """Handles any actions that should happen before a battle."""
+        self.handler.output("Battle start!")
         for entity in self.get_turn_order():
-            if isinstance(entity, Player):
-                entity.pre_battle(self.enemies)
-            elif isinstance(entity, Enemy):
-                entity.pre_battle(self.players)
+            entity.pre_battle()
 
 
 
     def process_turns(self) -> None:
         """Process a turn for each entity in the battle."""
         for entity in self.get_turn_order():
-            handler().output_event(TurnStartedEvent(entity))
-            if isinstance(entity, Player):
-                entity.take_turn(self.enemies)
-            elif isinstance(entity, Enemy):
-                entity.take_turn(self.players)
+            entity.take_turn()
 
 
 
     def post_battle(self) -> None:
         """Handles any actions that should happen after a battle."""
         for entity in self.get_turn_order():
-            if isinstance(entity, Player):
-                entity.post_battle(self.enemies)
-            elif isinstance(entity, Enemy):
-                entity.post_battle(self.players)
+            entity.post_battle()
+
+        self.handler.output("Battle has finished!")
 
 
-    def get_turn_order(self) -> list[Player | Enemy]:
+    def get_turn_order(self) -> list[Entity]:
         """Returns a list of all entities sorted by their speed."""
         p = self.players + self.enemies
-        return sorted(p, key=lambda e: e.speed, reverse=True)
+        return sorted(p, key=lambda e: e.data.get(Stat.SPEED), reverse=True)
     
 
     def players_won(self) -> bool:

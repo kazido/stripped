@@ -3,7 +3,7 @@ from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from textrpg.entities.player.player import Player
-    from textrpg.entities.enemies.enemy import Enemy
+    from textrpg.entities.enemy.enemy import Enemy
 
 
 class Event(ABC):
@@ -19,7 +19,7 @@ class MessageEvent(Event):
 
 class LevelUpEvent(Event):
     """Event fired when a player levels up."""
-    def __init__(self, player: "Player", skill_name: str, new_level: int) -> None:
+    def __init__(self, player: Player, skill_name: str, new_level: int) -> None:
         self.player = player
         self.skill_name = skill_name
         self.new_level = new_level

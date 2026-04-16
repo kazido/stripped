@@ -1,14 +1,14 @@
-class StatusEffect:
+class Status:
 
-    ON_FIRE: StatusEffect
-    ETERNAL_FIRE: StatusEffect
-    SILENCED: StatusEffect
+    ON_FIRE: Status
+    ETERNAL_FIRE: Status
+    SILENCED: Status
 
     def __init__(self, statusType: str) -> None:
         self.statusType = statusType
         self.is_permanent = False
         self.is_unstackable = False
-        self.turns_left = 1
+        self.duration = 1
 
     def set_unstackable(self):
         self.is_unstackable = True
@@ -19,17 +19,36 @@ class StatusEffect:
         return self
     
     def set_duration(self, amount: int):
-        self.turns_left = amount
+        self.duration = amount
         return self
-    
-    @property
-    def is_expired(self) -> bool:
-        return self.turns_left <= 0
 
     def __repr__(self) -> str:
-        return f"DamageSource({self.statusType})"
+        return f"Status({self.statusType})"
     
 
-StatusEffect.ON_FIRE = StatusEffect("on_fire").set_duration(3)
-StatusEffect.ETERNAL_FIRE = StatusEffect("eternal_fire").set_permanent()
-StatusEffect.SILENCED = StatusEffect("silenced").set_unstackable()
+Status.ON_FIRE = Status("on_fire").set_duration(3)
+Status.ETERNAL_FIRE = Status("eternal_fire").set_permanent()
+Status.SILENCED = Status("silenced").set_unstackable()
+
+
+class StatusEffect:
+
+    def __init__(self, status: Status) -> None:
+        self.status = status
+        self._turns_remaining = status.duration
+
+    def tick(self) -> None:
+        """Decreases turns remaining by 1, unless the effect is permanent."""
+        if not self.status.is_permanent:
+            self._turns_remaining -= 1
+
+    @property
+    def turns_remaining(self) -> int:
+        return self._turns_remaining
+
+    @property
+    def is_expired(self) -> bool:
+        return self._turns_remaining <= 0
+    
+    def __repr__(self) -> str:
+        return f"{self.status.statusType}: {self.turns_remaining}"
