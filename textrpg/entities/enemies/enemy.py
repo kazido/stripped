@@ -1,11 +1,11 @@
 from abc import ABC
-from textrpg.entities.entity import Entity
-from textrpg.util.stat_manager import Stat
+from textrpg.core.entity import Entity
+from textrpg.scenes.battle.util.stat_manager import Stat
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from textrpg.events.battle import Battle
+    from textrpg.scenes.battle.battle import Battle
     
 
 class Enemy(Entity, ABC):

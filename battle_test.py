@@ -1,9 +1,6 @@
-from textrpg.events.battle import Battle
-from textrpg.entities.player.player import Player
-from textrpg.entities.enemy.goblin import Goblin
-from textrpg.entities.enemy.centaur import Centaur
-from textrpg.entities.enemy.unstable_drone import UnstableDrone
-from textrpg.events.handlers import TerminalIOHandler
+from textrpg.scenes.battle.battle import Battle
+from textrpg.entities.player import Player
+from textrpg.entities.enemies import Goblin, Centaur, UnstableDrone
 
 from textrpg.entities.player.save_data import PlayerSaveData
 

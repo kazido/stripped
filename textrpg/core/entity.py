@@ -1,14 +1,14 @@
 from abc import ABC, abstractmethod
 
-from textrpg.util.damage_source import DamageSource
-from textrpg.util.status_effect import Status, StatusEffect
-from textrpg.util.stat_manager import Stat, StatManager
-from textrpg.events.event import EntityDeathEvent
+from textrpg.scenes.battle.util.damage_source import DamageSource
+from textrpg.scenes.battle.util.status_effect import Status, StatusEffect
+from textrpg.scenes.battle.util.stat_manager import Stat, StatManager
+from textrpg.core.event import EntityDeathEvent
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from textrpg.events.battle import Battle
+    from textrpg.scenes.battle.battle import Battle
 
 class Entity(ABC):
     def __init__(self, battle: Battle) -> None:

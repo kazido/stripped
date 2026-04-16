@@ -1,8 +1,8 @@
 from textrpg.entities.player.player import Player
-from textrpg.entities.enemy.enemy import Enemy
-from textrpg.entities.entity import Entity
-from textrpg.util.stat_manager import Stat
-from textrpg.events.io import IOHandler
+from textrpg.entities.enemies.enemy import Enemy
+from textrpg.core.entity import Entity
+from textrpg.scenes.battle.util.stat_manager import Stat
+from textrpg.core.io import IOHandler
 
 
 class Battle:

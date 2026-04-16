@@ -1,6 +1,6 @@
 from textrpg.entities.enemy.enemy import Enemy
-from textrpg.events.battle import Battle
-from textrpg.util.damage_source import DamageSource
+from textrpg.scenes.battle.battle import Battle
+from textrpg.scenes.battle.util.damage_source import DamageSource
 
 class Goblin(Enemy):
     NAME = "Goblin"

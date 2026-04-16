@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from textrpg.items.armor import Armor
 from textrpg.entities.player.save_data import PlayerSaveData
-from textrpg.util.stat_manager import Stat
-from textrpg.entities.entity import Entity
+from textrpg.scenes.battle.util.stat_manager import Stat
+from textrpg.core.entity import Entity
 from textrpg.items import ITEM_REGISTRY
 
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from textrpg.events.battle import Battle
+    from textrpg.scenes.battle.battle import Battle
 
 
 
@@ -23,7 +23,7 @@ class Player(Entity):
 
 
     def take_turn(self) -> None:
-        self.battle_in.handler.select_action()
+        pass
 
 
     def _get_gear_hp_bonus(self) -> int:

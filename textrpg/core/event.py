@@ -2,8 +2,8 @@ from abc import ABC
 from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from textrpg.entities.player.player import Player
-    from textrpg.entities.enemy.enemy import Enemy
+    from textrpg.entities.player import Player
+    from textrpg.entities.enemies import Enemy
 
 
 class Event(ABC):
